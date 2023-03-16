@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "proxy": "https://free3et.github.io/genesis-learning-app/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
