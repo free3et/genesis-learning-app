@@ -12,11 +12,12 @@ export const lessonsSlice = createApi({
       query: (arg) =>
         `/core/preview-courses?token=${import.meta.env.VITE_API_KEY_LESSONS}`,
       method: "GET",
+      credentials: "same-origin",
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
-      mode: "no-cors",
+      mode: "cors",
     }),
     getCourse: builder.query({
       query: (id) =>
