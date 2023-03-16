@@ -122,7 +122,7 @@ export const LessonPage = () => {
                   <Stack spacing={1} sx={{ flexDirection: "row" }}>
                     <Rating
                       name="half-rating-read"
-                      value={data?.rating}
+                      value={data?.rating || ""}
                       precision={0.1}
                       readOnly
                     />
