@@ -18,6 +18,8 @@ import {
 } from "@mui/material";
 import { Loader } from "../Loader/Loader";
 import { NavLink } from "react-router-dom";
+//import { Player } from "../Player/Player";
+import ReactHlsPlayer from "react-hls-player";
 
 export const LessonPage = () => {
   const { id } = useParams();
@@ -77,7 +79,15 @@ export const LessonPage = () => {
                   alt={title}
                 />
                 <Box>
-                  <video
+                  <ReactHlsPlayer
+                    src={meta?.courseVideoPreview?.link}
+                    autoPlay={false}
+                    controls={true}
+                    progressive={true}
+                    width="100%"
+                    height="auto"
+                  />
+                  {/* <video
                     id="my-video"
                     className="video-js"
                     width="352"
@@ -90,7 +100,7 @@ export const LessonPage = () => {
                       src={meta?.courseVideoPreview?.link}
                       type="application/x-mpegURL"
                     />
-                  </video>
+                  </video> */}
                 </Box>
                 <CardContent>
                   <Typography gutterBottom variant="h4" component="h2">
