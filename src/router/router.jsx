@@ -7,7 +7,7 @@ import { LessonsList } from "../components/LessonsList.jsx/LessonsList";
 
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/genesis-learning-app",
     element: <App />,
     //errorElement: <MyError />,
     children: [
@@ -17,8 +17,7 @@ export const router = createBrowserRouter([
       },
       {
         element: <LessonPage />,
-        path: "/:id",
-        //loader: fetchLesson,
+        path: "/genesis-learning-app/:id",
       },
     ],
   },
