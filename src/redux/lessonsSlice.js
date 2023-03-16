@@ -12,6 +12,10 @@ export const lessonsSlice = createApi({
       query: (arg) =>
         `/core/preview-courses?token=${import.meta.env.VITE_API_KEY_LESSONS}`,
       method: "GET",
+      headers: {
+        "Access-Control-Allow-Origin":
+          "https://free3et.github.io/genesis-learning-app/",
+      },
     }),
     getCourse: builder.query({
       query: (id) =>
