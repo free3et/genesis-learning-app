@@ -9,7 +9,7 @@ export default defineConfig({
     "/api": {
       target: "https://api.wisey.app/",
       changeOrigin: true,
-      //secure: false,
+      secure: false,
     },
   },
 });
