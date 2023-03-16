@@ -87,7 +87,7 @@ export const LessonPage = () => {
                     data-setup="{}"
                   >
                     <source
-                      src="https://wisey.app/videos/lack-of-motivation-how-to-overcome-it/preview/AppleHLS1/preview.m3u8"
+                      src={meta?.courseVideoPreview?.link}
                       type="application/x-mpegURL"
                     />
                   </video>
