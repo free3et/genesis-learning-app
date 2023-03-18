@@ -1,25 +1,78 @@
 import ReactHlsPlayer from "react-hls-player";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
-export const Player = () => {
+export const VideoPlayer = ({ src, lessonId }) => {
   const playerRef = useRef();
 
-  function playVideo() {
-    playerRef.current.play();
-  }
+  useEffect(() => {
+    function getVideoViewingProgressFromStorage() {
+      let currentTimeVideo = localStorage.getItem(`video-${lessonId}`);
 
-  function pauseVideo() {
-    playerRef.current.pause();
-  }
+      if (
+        currentTimeVideo &&
+        playerRef.current.classList.contains(`video-${lessonId}`)
+      ) {
+        playerRef.current.currentTime = currentTimeVideo;
+      }
 
-  function toggleControls() {
-    playerRef.current.controls = !playerRef.current.controls;
-  }
+      if (+currentTimeVideo === playerRef?.current?.duration) {
+        playerRef.current.currentTime = 0;
+      }
+
+      return currentTimeVideo;
+    }
+
+    playerRef.current.addEventListener(
+      "play",
+      getVideoViewingProgressFromStorage
+    );
+  }, []);
+
+  useEffect(() => {
+    function setVideoViewingProgressInStorage() {
+      localStorage.setItem(
+        `video-${lessonId}`,
+        playerRef?.current?.currentTime
+      );
+    }
+
+    playerRef.current.classList.add("video-" + lessonId);
+
+    playerRef.current.addEventListener(
+      "pause",
+      setVideoViewingProgressInStorage
+    );
+  }, [playerRef?.current?.currentTime]);
+
+  useEffect(() => {
+    function changePlayerSpeed(event) {
+      if (event.key === "=") {
+        playerRef.current.playbackRate += 0.25;
+        if (playerRef.current.playbackRate > 3) return;
+      }
+
+      if (event.key === "-") {
+        playerRef.current.playbackRate -= 0.25;
+      }
+
+      if (event.key === "0") {
+        playerRef.current.playbackRate = 1;
+      }
+    }
+
+    window.addEventListener("keydown", changePlayerSpeed);
+  }, []);
 
   return (
-    <ReactHlsPlayer
-      playerRef={playerRef}
-      src="https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"
-    />
+    <>
+      <ReactHlsPlayer
+        playerRef={playerRef}
+        src={src}
+        muted={false}
+        controls={true}
+        width="100%"
+        height="auto"
+      />
+    </>
   );
 };

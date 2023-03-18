@@ -1,6 +1,8 @@
 import { useGetCourseQuery } from "../../redux/lessonsSlice";
-import { useParams } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
+import { useRef } from "react";
 import {
+  Container,
   Grid,
   Card,
   CardMedia,
@@ -17,9 +19,10 @@ import {
   Box,
 } from "@mui/material";
 import { Loader } from "../Loader/Loader";
-import { NavLink } from "react-router-dom";
-//import { Player } from "../Player/Player";
 import ReactHlsPlayer from "react-hls-player";
+
+import { LessonCard } from "../LessonCard/LessonCard";
+import { VideoPlayer } from "../Player/Player";
 
 export const LessonPage = () => {
   const { id } = useParams();
@@ -33,6 +36,7 @@ export const LessonPage = () => {
   } = useGetCourseQuery(id);
 
   const {
+    id: lessonId,
     title,
     previewImageLink,
     meta,
@@ -44,7 +48,6 @@ export const LessonPage = () => {
     tags,
   } = data;
 
-  console.log(data);
   const getMovieRuntime = (mins) => {
     let hours = Math.trunc(mins / 60);
     let minutes = mins % 60;
@@ -52,60 +55,74 @@ export const LessonPage = () => {
     return `${hours}h ${minutes}m`;
   };
 
+  const playerRef = useRef();
+
   return (
     <>
       {isLoading && (
-        <Grid container spacing={2} justifyContent="center">
-          <Loader />
-        </Grid>
+        <Container maxWidth="md" disableGutters>
+          <Grid container spacing={2} justifyContent="center">
+            <Loader />
+          </Grid>
+        </Container>
       )}
-      <Grid container spacing={2}>
-        <Grid item xs={12} key={id}>
-          <NavLink className="read-more" to={id}>
-            <Card
-              sx={{
-                m: 2,
-                backgroundColor: "rgba(255, 255, 255, .65)",
-                backdropFilter: "blur(15px)",
-                border: "1px solid rgba(255, 255, 255, .25)",
-                borderRadius: "10px",
-              }}
-            >
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image={previewImageLink + "/cover.webp"}
-                  alt={title}
-                />
-                <Box>
-                  <ReactHlsPlayer
-                    src={meta?.courseVideoPreview?.link}
-                    autoPlay={false}
-                    controls={true}
-                    progressive={true}
-                    width="100%"
-                    height="auto"
+      {!isLoading && (
+        <Container maxWidth="md" disableGutters>
+          <Grid container spacing={2}>
+            <Grid item xs={12} key={id}>
+              <Card
+                sx={{
+                  m: 2,
+                  backgroundColor: "rgba(255, 255, 255, .65)",
+                  backdropFilter: "blur(15px)",
+                  border: "1px solid rgba(255, 255, 255, .25)",
+                  borderRadius: "10px",
+                }}
+              >
+                <Typography
+                  gutterBottom
+                  variant="h4"
+                  component="h2"
+                  textAlign="center"
+                  p={2}
+                >
+                  {title}
+                </Typography>
+                {/*           <Grid container spacing={2} justifyContent="center">
+                <Grid item md={11}>
+                  <CardMedia
+                    component="img"
+                    height="100%"
+                    image={previewImageLink + "/cover.webp"}
+                    alt={title}
                   />
-                  {/* <video
-                    id="my-video"
-                    className="video-js"
-                    width="352"
-                    height="198"
-                    controls
-                    preload="auto"
-                    data-setup="{}"
-                  >
-                    <source
-                      src={meta?.courseVideoPreview?.link}
-                      type="application/x-mpegURL"
-                    />
-                  </video> */}
-                </Box>
+                </Grid>
+              </Grid> */}
+
                 <CardContent>
-                  <Typography gutterBottom variant="h4" component="h2">
-                    {title}
-                  </Typography>
+                  <Grid container spacing={2} justifyContent="center">
+                    <Grid item md={8}>
+                      <VideoPlayer
+                        src={meta?.courseVideoPreview?.link}
+                        lessonId={lessonId}
+                      />
+                      <Typography gutterBottom variant="body1" component="h2">
+                        To make it louder, press the + key, to make it quieter,
+                        press the - key. Return speed to normal - press 0
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                  <Stack spacing={1} sx={{ flexDirection: "row" }}>
+                    <Rating
+                      name="half-rating-read"
+                      value={+data?.rating || +""}
+                      precision={0.1}
+                      readOnly
+                    />
+                    <Typography variant="body2" color="text.secondary" pl={2}>
+                      [{data?.rating}]
+                    </Typography>
+                  </Stack>
                   <Typography gutterBottom variant="body1" component="h2">
                     {description}
                   </Typography>
@@ -115,6 +132,11 @@ export const LessonPage = () => {
                   <Typography gutterBottom variant="body1" component="h2">
                     {launchDate?.slice(0, 10)}
                   </Typography>
+                  <Stack direction="row" spacing={2}>
+                    {/* <Button variant="contained" color="secondary"> */}
+                    {tags}
+                    {/* </Button> */}
+                  </Stack>
                   {data?.meta?.skills && (
                     <List>
                       <Typography variant="h5" color="text.secondary">
@@ -129,28 +151,27 @@ export const LessonPage = () => {
                     </List>
                   )}
                   <Divider />
-                  <Stack spacing={1} sx={{ flexDirection: "row" }}>
-                    <Rating
-                      name="half-rating-read"
-                      value={+data?.rating || +""}
-                      precision={0.1}
-                      readOnly
-                    />
-                    <Typography variant="body2" color="text.secondary" pl={2}>
-                      [{data?.rating}]
-                    </Typography>
-                  </Stack>
-                  <Stack direction="row" spacing={2}>
-                    {/* <Button variant="contained" color="secondary"> */}
-                    {tags}
-                    {/* </Button> */}
-                  </Stack>
+
+                  {data?.lessons && (
+                    <>
+                      <Typography variant="h5" color="text.secondary">
+                        Lessons:
+                      </Typography>
+                      <Grid container spacing={2}>
+                        {data?.lessons?.map((lesson, index) => (
+                          <Grid item xs={12} sm={6} md={4} key={lesson.id}>
+                            <LessonCard lesson={lesson} key={lesson.title} />
+                          </Grid>
+                        ))}
+                      </Grid>
+                    </>
+                  )}
                 </CardContent>
-              </CardActionArea>
-            </Card>
-          </NavLink>
-        </Grid>
-      </Grid>
+              </Card>
+            </Grid>
+          </Grid>
+        </Container>
+      )}
     </>
   );
 };
