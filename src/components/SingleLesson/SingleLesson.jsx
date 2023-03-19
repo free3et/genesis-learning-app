@@ -12,7 +12,6 @@ import {
   Divider,
   Stack,
   Rating,
-  //Button,
   Box,
 } from "@mui/material";
 import { VideoPlayerWithHover } from "../Player/PlayerWithHover";
@@ -45,34 +44,33 @@ export const SingleLesson = ({ lesson }) => {
         <CardActionArea>
           <CardMedia
             component="img"
-            height="140"
+            height="180"
             image={previewImageLink + "/cover.webp"}
             alt={title}
           />
           <CardContent>
-            <Typography gutterBottom variant="h25" component="h2">
+            <Typography gutterBottom variant="h3" component="h3" mb={2}>
               {title}
             </Typography>
-            {lessonsCount && (
-              <Typography variant="subtitle1" color="text.secondary">
-                Number of lessons: {lessonsCount}
-              </Typography>
-            )}
-            <Grid item>
+
+            <Grid item mb={1.5}>
               <VideoPlayerWithHover
                 muted={true}
                 src={meta?.courseVideoPreview?.link}
               />
             </Grid>
+            {lessonsCount && (
+              <Typography variant="h4">
+                Number of lessons: {lessonsCount}
+              </Typography>
+            )}
             {meta?.skills && (
               <List>
-                <Typography variant="h5" color="text.secondary">
-                  Skills:
-                </Typography>
+                <Typography variant="h4">Skills:</Typography>
                 {meta?.skills?.map((skill, index) => (
                   <ListItem key={index} component="li" disablePadding>
                     &#9734;
-                    <ListItemText primary={skill} />
+                    <ListItemText primary={skill} sx={{ pl: 1 }} />
                   </ListItem>
                 ))}
               </List>
@@ -83,16 +81,36 @@ export const SingleLesson = ({ lesson }) => {
                 name="half-rating-read"
                 value={rating}
                 precision={0.1}
+                size="small"
                 readOnly
               />
-              <Typography variant="body2" color="text.secondary" pl={2}>
+              <Typography
+                variant="subtitle2"
+                color="secondary"
+                pl={2}
+                sx={{ mt: 0 }}
+              >
                 [{rating}]
               </Typography>
             </Stack>
-            <Box direction="row" spacing={2}>
-              {/*             <Button variant="contained" color="secondary"> */}
-              {tags && tags[0]}
-              {/*     </Button> */}
+            <Box
+              direction="row"
+              spacing={2}
+              sx={{
+                display: "inline-block",
+                mt: 1,
+                p: 0.7,
+                borderRadius: 1,
+                border: "2px solid #9c27b0",
+              }}
+            >
+              <Typography
+                variant="subtitle1"
+                fontWeight="bold"
+                textTransform="capitalize"
+              >
+                {tags}
+              </Typography>
             </Box>
           </CardContent>
         </CardActionArea>

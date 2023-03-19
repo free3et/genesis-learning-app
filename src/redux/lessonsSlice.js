@@ -14,16 +14,13 @@ export const lessonsSlice = createApi({
       method: "GET",
       credentials: "same-origin",
       prepareHeaders: (headers) => {
-        //headers.set("authorization", `Bearer ${accessToken}`);
         headers.set("Content-Type", "application/json");
         headers.set("Access-Control-Allow-Origin", "*");
         headers.set("Access-Control-Allow-Headers", "*");
-
         headers.set(
           "Authorization",
           `Bearer ${import.meta.env.VITE_API_KEY_LESSONS}')`
         );
-        console.log(headers);
         return headers;
       },
       mode: "cors",

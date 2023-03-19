@@ -3,12 +3,10 @@ import {
   Card,
   CardContent,
   CardMedia,
-  CardActionArea,
   Typography,
   Badge,
   Button,
 } from "@mui/material";
-
 import LockIcon from "@mui/icons-material/Lock";
 import { VideoModal } from "../Modal/Modal";
 
@@ -20,7 +18,7 @@ export const LessonCard = ({ lesson }) => {
   return (
     <>
       {status === "locked" && (
-        <Card sx={{ position: "relative", opacity: 0.7 }}>
+        <Card sx={{ position: "relative", opacity: 0.7, minHeight: "282px" }}>
           <CardMedia
             component="img"
             height="140"
@@ -28,7 +26,12 @@ export const LessonCard = ({ lesson }) => {
             alt={title}
           />
           <CardContent>
-            <Typography gutterBottom variant="h6" component="h2">
+            <Typography
+              gutterBottom
+              variant="subtitle2"
+              fontWeight="bold"
+              component="h4"
+            >
               {title}
             </Typography>
             <Button variant="outlined" color="secondary">
@@ -44,7 +47,7 @@ export const LessonCard = ({ lesson }) => {
         </Card>
       )}
       {status === "unlocked" && (
-        <Card sx={{ cursor: "pointer" }}>
+        <Card sx={{ cursor: "pointer", minHeight: "282px" }}>
           <CardMedia
             component="img"
             height="140"
@@ -52,7 +55,12 @@ export const LessonCard = ({ lesson }) => {
             alt={title}
           />
           <CardContent>
-            <Typography gutterBottom variant="h6" component="h2">
+            <Typography
+              gutterBottom
+              variant="subtitle2"
+              fontWeight="bold"
+              component="h4"
+            >
               {title}
             </Typography>
 
@@ -62,35 +70,4 @@ export const LessonCard = ({ lesson }) => {
       )}
     </>
   );
-
-  /*
-    <NavLink className="read-more" to={id}>
-      <Card>
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            height="140"
-            image={previewImageLink + "/lesson-" + order + ".webp"}
-            alt={title}
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              {title}
-            </Typography>
-
-            <Grid item>
-              <VideoPlayer muted={true} src={link} />
-            </Grid>
-            {status === "locked" && (
-              <Badge
-                color="primary"
-                sx={{ position: "absolute", bottom: 0, right: 0 }}
-              >
-                <LockIcon color="error" />
-              </Badge>
-            )}
-          </CardContent>
-        </CardActionArea>
-      </Card>
-    </NavLink> */
 };

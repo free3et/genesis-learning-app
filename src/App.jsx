@@ -1,6 +1,5 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { Container } from "@mui/system";
-import * as React from "react";
 import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -12,6 +11,8 @@ import Fab from "@mui/material/Fab";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Fade from "@mui/material/Fade";
 import logo from "./assets/logo.svg";
+import { ThemeProvider } from "@mui/material/styles";
+import { theme } from "./theme";
 
 function ScrollTop(props) {
   const { children, window } = props;
@@ -49,48 +50,47 @@ function ScrollTop(props) {
 export const Layout = (props) => {
   return (
     <>
-      <CssBaseline />
-      <AppBar>
-        <Toolbar
-          sx={{
-            background: "linear-gradient(45deg, #bbe7ff, #0274b2)",
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          <Box>
-            <img src={logo} className="App-logo" alt="logo" />
-          </Box>
-          <Box>
-            <NavLink
-              to="/genesis-learning-app/"
-              style={{ textDecoration: "none", color: "#ffffff" }}
-            >
-              <Typography variant="h6" component="span">
-                My Courses
-              </Typography>
-            </NavLink>
-          </Box>
-        </Toolbar>
-      </AppBar>
-      <Toolbar id="back-to-top-anchor" />
-      <Container maxWidth="lg" sx={{ mt: 3 }} disableGutters>
-        <Outlet></Outlet>
-      </Container>
-      <ScrollTop {...props}>
-        <Fab size="small" aria-label="scroll back to top">
-          <KeyboardArrowUpIcon />
-        </Fab>
-      </ScrollTop>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <AppBar>
+          <Toolbar
+            sx={{
+              background: "linear-gradient(45deg, #bbe7ff, #0274b2)",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <Box>
+              <img src={logo} className="App-logo" alt="logo" />
+            </Box>
+            <Box>
+              <NavLink
+                to="/genesis-learning-app/"
+                style={{ textDecoration: "none", color: "#ffffff" }}
+              >
+                <Typography variant="h4" component="span">
+                  My Courses
+                </Typography>
+              </NavLink>
+            </Box>
+          </Toolbar>
+        </AppBar>
+        <Toolbar id="back-to-top-anchor" />
+        <Container maxWidth="lg" sx={{ mt: 3 }} disableGutters>
+          <Outlet></Outlet>
+        </Container>
+
+        <ScrollTop {...props}>
+          <Fab size="small" aria-label="scroll back to top">
+            <KeyboardArrowUpIcon />
+          </Fab>
+        </ScrollTop>
+      </ThemeProvider>
     </>
   );
 };
 
 ScrollTop.propTypes = {
   children: PropTypes.element.isRequired,
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
   window: PropTypes.func,
 };

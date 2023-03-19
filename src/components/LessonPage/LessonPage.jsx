@@ -1,27 +1,25 @@
 import { useGetCourseQuery } from "../../redux/lessonsSlice";
-import { useParams, NavLink } from "react-router-dom";
-import { useRef } from "react";
+import { useParams } from "react-router-dom";
 import {
   Container,
   Grid,
   Card,
-  CardMedia,
   CardContent,
-  CardActionArea,
   Typography,
   Divider,
   Stack,
   Rating,
-  //Button,
   List,
   ListItem,
   ListItemText,
   Box,
 } from "@mui/material";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import DateRangeIcon from "@mui/icons-material/DateRange";
 import { SkeletonOnLoading } from "../Skeleton/Skeleton";
-
 import { LessonCard } from "../LessonCard/LessonCard";
 import { VideoPlayer } from "../Player/Player";
+import { TableDurationReleaseDateCategory } from "./table";
 
 export const LessonPage = () => {
   const { id } = useParams();
@@ -40,7 +38,6 @@ export const LessonPage = () => {
     previewImageLink,
     meta,
     lessons,
-    //rating,
     description,
     duration,
     launchDate,
@@ -53,8 +50,6 @@ export const LessonPage = () => {
 
     return `${hours}h ${minutes}m`;
   };
-
-  const playerRef = useRef();
 
   return (
     <>
@@ -80,10 +75,10 @@ export const LessonPage = () => {
               >
                 <Typography
                   gutterBottom
-                  variant="h4"
+                  variant="h2"
                   component="h2"
                   textAlign="center"
-                  p={2}
+                  p="16px 16px 0"
                 >
                   {title}
                 </Typography>
@@ -99,52 +94,98 @@ export const LessonPage = () => {
               </Grid> */}
 
                 <CardContent>
-                  <Grid container spacing={2} justifyContent="center">
+                  <Grid container justifyContent="center">
                     <Grid item md={8}>
                       <VideoPlayer
                         src={meta?.courseVideoPreview?.link}
                         lessonId={lessonId}
                       />
-                      <Typography gutterBottom variant="body1" component="h2">
-                        To make it louder, press the + key, to make it quieter,
-                        press the - key. Return speed to normal - press 0
+                      <Typography
+                        gutterBottom
+                        variant="body2"
+                        component="h5"
+                        color="primary"
+                      >
+                        To make it louder, press the "+" key, to make it
+                        quieter, press the "-" key. Return speed to normal -
+                        press 0
                       </Typography>
                     </Grid>
                   </Grid>
-                  <Stack spacing={1} sx={{ flexDirection: "row" }}>
+                  {/* <Divider />
+                   <Stack spacing={1} sx={{ flexDirection: "row", mt: 2 }}>
                     <Rating
                       name="half-rating-read"
+                      size="small"
                       value={+data?.rating || +""}
                       precision={0.1}
+                      mt={2}
                       readOnly
                     />
-                    <Typography variant="body2" color="text.secondary" pl={2}>
+                    <Typography
+                      variant="subtitle2"
+                      color="secondary"
+                      pl={2}
+                      sx={{ mt: 0 }}
+                    >
                       [{data?.rating}]
                     </Typography>
                   </Stack>
                   <Typography gutterBottom variant="body1" component="h2">
                     {description}
                   </Typography>
-                  <Typography gutterBottom variant="body1" component="h2">
+                  <Box
+                    direction="row"
+                    spacing={2}
+                    sx={{
+                      display: "inline-block",
+                      mb: 1.2,
+                      p: 0.5,
+                      borderRadius: 1,
+                      border: "2px solid #9c27b0",
+                    }}
+                  >
+                    <Typography
+                      variant="body1"
+                      fontWeight="bold"
+                      textTransform="capitalize"
+                    >
+                      {tags}
+                    </Typography>
+                  </Box>
+                  <Typography
+                    gutterBottom
+                    variant="body1"
+                    component="h2"
+                    display="flex"
+                  >
+                    <AccessTimeIcon fontSize="small" sx={{ mr: 0.6 }} />
                     {getMovieRuntime(duration)}
                   </Typography>
-                  <Typography gutterBottom variant="body1" component="h2">
+                  <Typography
+                    gutterBottom
+                    variant="body1"
+                    component="h2"
+                    display="flex"
+                  >
+                    <DateRangeIcon fontSize="small" sx={{ mr: 0.6 }} />
                     {launchDate?.slice(0, 10)}
-                  </Typography>
-                  <Stack direction="row" spacing={2}>
-                    {/* <Button variant="contained" color="secondary"> */}
-                    {tags}
-                    {/* </Button> */}
-                  </Stack>
+                  </Typography> */}
+                  <TableDurationReleaseDateCategory
+                    category={tags}
+                    release_date={launchDate}
+                    duration={getMovieRuntime(duration)}
+                    rating={data?.rating}
+                  />
                   {data?.meta?.skills && (
                     <List>
-                      <Typography variant="h5" color="text.secondary">
+                      <Typography variant="h4" color="text.secondary">
                         Skills:
                       </Typography>
                       {data?.meta?.skills?.map((skill, index) => (
                         <ListItem key={index} component="li" disablePadding>
                           &#9734;
-                          <ListItemText primary={skill} />
+                          <ListItemText primary={skill} sx={{ pl: 1 }} />
                         </ListItem>
                       ))}
                     </List>
@@ -153,7 +194,7 @@ export const LessonPage = () => {
 
                   {data?.lessons && (
                     <>
-                      <Typography variant="h5" color="text.secondary">
+                      <Typography variant="h4" color="text.secondary" mt={2}>
                         Lessons:
                       </Typography>
                       <Grid container spacing={2}>

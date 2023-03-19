@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import { SearchBlock } from "../components/SearchBlock/SearchBlock";
 import { LessonPage } from "../components/LessonPage/LessonPage";
 import { LessonsList } from "../components/LessonsList.jsx/LessonsList";
 import { Layout } from "../App";

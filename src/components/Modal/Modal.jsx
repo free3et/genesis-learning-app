@@ -37,9 +37,10 @@ export const VideoModal = ({ title, src, lessonId }) => {
           <Typography
             id="modal-modal-title"
             variant="h6"
-            component="h2"
+            component="h4"
             color="primary"
             textAlign="center"
+            mb="10px"
           >
             {title}
           </Typography>

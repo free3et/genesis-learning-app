@@ -1,24 +1,6 @@
-import { useGetAllCoursesQuery } from "../../redux/lessonsSlice";
-import { NavLink } from "react-router-dom";
-import {
-  Grid,
-  Card,
-  CardContent,
-  CardMedia,
-  CardActionArea,
-  Typography,
-  ListItem,
-  ListItemText,
-  List,
-  Divider,
-  Stack,
-  Rating,
-  //Button,
-  Box,
-  Pagination,
-} from "@mui/material";
 import { useState } from "react";
-
+import { Grid, Pagination } from "@mui/material";
+import { useGetAllCoursesQuery } from "../../redux/lessonsSlice";
 import { SingleLesson } from "../SingleLesson/SingleLesson";
 import { SkeletonOnLoading } from "../Skeleton/Skeleton";
 
@@ -30,7 +12,6 @@ export const LessonsList = () => {
     isSuccess,
     error,
   } = useGetAllCoursesQuery();
-  console.log(data?.courses);
 
   const [page, setPage] = useState(1);
   const handleChange = (event, value) => {
@@ -47,11 +28,15 @@ export const LessonsList = () => {
     <>
       {isLoading && (
         <Grid container spacing={2} justifyContent="center">
-          <SkeletonOnLoading />
-          <SkeletonOnLoading />
-          <SkeletonOnLoading />
+          <Grid item>
+            <SkeletonOnLoading />
+          </Grid>
+          <Grid item>
+            <SkeletonOnLoading />
+          </Grid>
         </Grid>
       )}
+
       <Grid container spacing={2} justifyContent="center">
         {data?.courses && (
           <Pagination
@@ -63,7 +48,6 @@ export const LessonsList = () => {
             count={pagesCount}
             shape="rounded"
             color="primary"
-            //variant="outlined"
             page={page}
             onChange={handleChange}
           />
