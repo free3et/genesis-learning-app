@@ -66,7 +66,7 @@ export const Layout = (props) => {
             </Box>
             <Box>
               <NavLink
-                to="/genesis-learning-app/"
+                to="/"
                 style={{ textDecoration: "none", color: "#ffffff" }}
               >
                 <Typography variant="subtitle1" component="span">

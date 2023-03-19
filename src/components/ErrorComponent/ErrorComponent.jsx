@@ -17,10 +17,7 @@ export const ErrorComponent = ({ message, statusCode }) => {
           </Typography>
           <Box mt={2}>
             <Button variant="contained" color="secondary">
-              <NavLink
-                to="/genesis-learning-app/"
-                style={{ textDecoration: "none" }}
-              >
+              <NavLink to="/" style={{ textDecoration: "none" }}>
                 Go Home
               </NavLink>
             </Button>
