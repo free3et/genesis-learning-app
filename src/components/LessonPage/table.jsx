@@ -26,14 +26,24 @@ export const TableDurationReleaseDateCategory = ({
 
   const rows = [createData(category, duration, release_date)];
   return (
-    <TableContainer>
+    <TableContainer
+      sx={{ display: { xl: "block", md: "block", sm: "block", xs: "none" } }}
+    >
       <Table sx={{ minWidth: 300 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align="center"></TableCell>
-            <TableCell align="center"></TableCell>
-            <TableCell align="center"></TableCell>
-            <TableCell align="center"></TableCell>
+            <TableCell
+              sx={{ borderBottom: "1px solid #83a1be", p: "8px" }}
+            ></TableCell>
+            <TableCell
+              sx={{ borderBottom: "1px solid #83a1be", p: "8px" }}
+            ></TableCell>
+            <TableCell
+              sx={{ borderBottom: "1px solid #83a1be", p: "8px" }}
+            ></TableCell>
+            <TableCell
+              sx={{ borderBottom: "1px solid #83a1be", p: "8px" }}
+            ></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -69,6 +79,7 @@ export const TableDurationReleaseDateCategory = ({
                   variant="body2"
                   component="h2"
                   display="flex"
+                  alignItems="center"
                 >
                   <AccessTimeIcon fontSize="small" sx={{ mr: 0.6 }} />
                   {duration}
@@ -80,12 +91,13 @@ export const TableDurationReleaseDateCategory = ({
                   variant="body2"
                   component="h2"
                   display="flex"
+                  alignItems="center"
                 >
                   <DateRangeIcon fontSize="small" sx={{ mr: 0.6 }} />
                   {release_date?.slice(0, 10)}
                 </Typography>
               </TableCell>
-              <TableCell align="center">
+              <TableCell>
                 <Stack spacing={1} sx={{ flexDirection: "row" }}>
                   <Rating
                     name="half-rating-read"

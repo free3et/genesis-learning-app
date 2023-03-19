@@ -14,10 +14,13 @@ import {
   ListItemText,
   Box,
 } from "@mui/material";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import DateRangeIcon from "@mui/icons-material/DateRange";
 import { SkeletonOnLoading } from "../Skeleton/Skeleton";
 import { LessonCard } from "../LessonCard/LessonCard";
 import { VideoPlayer } from "../Player/Player";
 import { TableDurationReleaseDateCategory } from "./table";
+import { RaitingDateDuration } from "./RaitingDateDuration";
 import { ErrorComponent } from "../ErrorComponent/ErrorComponent";
 
 export const LessonPage = () => {
@@ -88,17 +91,6 @@ export const LessonPage = () => {
                 >
                   {title}
                 </Typography>
-                {/*           <Grid container spacing={2} justifyContent="center">
-                <Grid item md={11}>
-                  <CardMedia
-                    component="img"
-                    height="100%"
-                    image={previewImageLink + "/cover.webp"}
-                    alt={title}
-                  />
-                </Grid>
-              </Grid> */}
-
                 <CardContent>
                   <Grid container justifyContent="center">
                     <Grid item md={10}>
@@ -118,65 +110,22 @@ export const LessonPage = () => {
                       </Typography>
                     </Grid>
                   </Grid>
-                  {/* <Divider />
-                   <Stack spacing={1} sx={{ flexDirection: "row", mt: 2 }}>
-                    <Rating
-                      name="half-rating-read"
-                      size="small"
-                      value={+data?.rating || +""}
-                      precision={0.1}
-                      mt={2}
-                      readOnly
-                    />
-                    <Typography
-                      variant="subtitle2"
-                      color="secondary"
-                      pl={2}
-                      sx={{ mt: 0 }}
-                    >
-                      [{data?.rating}]
-                    </Typography>
-                  </Stack>
-                  <Typography gutterBottom variant="body1" component="h2">
+                  <Divider sx={{ mt: 1 }} />
+                  <Typography
+                    gutterBottom
+                    variant="body1"
+                    component="h2"
+                    textAlign="center"
+                    mt={2}
+                  >
                     {description}
                   </Typography>
-                  <Box
-                    direction="row"
-                    spacing={2}
-                    sx={{
-                      display: "inline-block",
-                      mb: 1.2,
-                      p: 0.5,
-                      borderRadius: 1,
-                      border: "2px solid #9c27b0",
-                    }}
-                  >
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      textTransform="capitalize"
-                    >
-                      {tags}
-                    </Typography>
-                  </Box>
-                  <Typography
-                    gutterBottom
-                    variant="body1"
-                    component="h2"
-                    display="flex"
-                  >
-                    <AccessTimeIcon fontSize="small" sx={{ mr: 0.6 }} />
-                    {getMovieRuntime(duration)}
-                  </Typography>
-                  <Typography
-                    gutterBottom
-                    variant="body1"
-                    component="h2"
-                    display="flex"
-                  >
-                    <DateRangeIcon fontSize="small" sx={{ mr: 0.6 }} />
-                    {launchDate?.slice(0, 10)}
-                  </Typography> */}
+                  <RaitingDateDuration
+                    category={tags}
+                    release_date={launchDate}
+                    duration={getMovieRuntime(duration)}
+                    rating={data?.rating}
+                  />
                   <TableDurationReleaseDateCategory
                     category={tags}
                     release_date={launchDate}

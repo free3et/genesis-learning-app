@@ -26,7 +26,7 @@ export const Footer = () => {
             <img src={logo_footer} className="App-logo" alt="logo" />
           </Grid>
 
-          <Grid item xs={6} md={3}>
+          <Grid item xs={6} md={3} pt={0}>
             <List>
               <Typography
                 variant="caption"
@@ -86,7 +86,7 @@ export const Footer = () => {
                 <img
                   src={download}
                   alt="Download on the AppStore"
-                  style={{ maxWidth: "130px" }}
+                  style={{ maxWidth: "120px" }}
                 />
               </a>
             </Box>

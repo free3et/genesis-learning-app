@@ -7,8 +7,6 @@ import { ErrorComponent } from "../ErrorComponent/ErrorComponent";
 
 export const LessonsList = () => {
   const { data = [], isLoading, isError, error } = useGetAllCoursesQuery();
-  console.log(isError);
-  console.log(error?.data);
 
   const [page, setPage] = useState(1);
   const handleChange = (event, value) => {
