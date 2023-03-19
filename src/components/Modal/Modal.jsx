@@ -1,7 +1,6 @@
+import { useState } from "react";
 import { Grid, Box, Button, Typography, Modal } from "@mui/material";
 import { VideoPlayer } from "../Player/Player";
-
-import { useState } from "react";
 
 const style = {
   position: "absolute",
@@ -9,8 +8,6 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: "auto",
-  //bgcolor: "background.paper",
-  //border: "2px solid #000",
   boxShadow: 24,
   borderRadius: 1.5,
   p: 2,

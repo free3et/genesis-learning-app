@@ -3,15 +3,12 @@ import { Grid, Pagination } from "@mui/material";
 import { useGetAllCoursesQuery } from "../../redux/lessonsSlice";
 import { SingleLesson } from "../SingleLesson/SingleLesson";
 import { SkeletonOnLoading } from "../Skeleton/Skeleton";
+import { ErrorComponent } from "../ErrorComponent/ErrorComponent";
 
 export const LessonsList = () => {
-  const {
-    data = [],
-    isLoading,
-    isError,
-    isSuccess,
-    error,
-  } = useGetAllCoursesQuery();
+  const { data = [], isLoading, isError, error } = useGetAllCoursesQuery();
+  console.log(isError);
+  console.log(error?.data);
 
   const [page, setPage] = useState(1);
   const handleChange = (event, value) => {
@@ -31,10 +28,14 @@ export const LessonsList = () => {
           <Grid item>
             <SkeletonOnLoading />
           </Grid>
-          <Grid item>
-            <SkeletonOnLoading />
-          </Grid>
         </Grid>
+      )}
+
+      {isError && (
+        <ErrorComponent
+          statusCode={error?.data?.statusCode}
+          message={error?.data?.message}
+        />
       )}
 
       <Grid container spacing={2} justifyContent="center">

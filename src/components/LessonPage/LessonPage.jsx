@@ -14,12 +14,11 @@ import {
   ListItemText,
   Box,
 } from "@mui/material";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import DateRangeIcon from "@mui/icons-material/DateRange";
 import { SkeletonOnLoading } from "../Skeleton/Skeleton";
 import { LessonCard } from "../LessonCard/LessonCard";
 import { VideoPlayer } from "../Player/Player";
 import { TableDurationReleaseDateCategory } from "./table";
+import { ErrorComponent } from "../ErrorComponent/ErrorComponent";
 
 export const LessonPage = () => {
   const { id } = useParams();
@@ -60,7 +59,14 @@ export const LessonPage = () => {
           </Grid>
         </Container>
       )}
-      {!isLoading && (
+
+      {isError && (
+        <ErrorComponent
+          statusCode={error?.data?.statusCode}
+          message={error?.data?.message}
+        />
+      )}
+      {!isLoading && !isError && (
         <Container maxWidth="md" disableGutters>
           <Grid container spacing={2}>
             <Grid item xs={12} key={id}>

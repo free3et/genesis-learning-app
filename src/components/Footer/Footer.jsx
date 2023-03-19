@@ -1,8 +1,3 @@
-import FolderIcon from "@mui/icons-material/Folder";
-import RestoreIcon from "@mui/icons-material/Restore";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import { useState } from "react";
 import logo_footer from "../../assets/logo_footer.svg";
 import download from "../../assets/download_app.svg";
 import instagram from "../../assets/instagram_logo.svg";
@@ -19,14 +14,12 @@ import {
 } from "@mui/material";
 
 export const Footer = () => {
-  const [value, setValue] = useState("recents");
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
   return (
-    <Grid sx={{ background: "#1f1f1f" }}>
+    <Grid
+      sx={{
+        background: "#1f1f1f",
+      }}
+    >
       <Container>
         <Grid container justifyContent="space-around" spacing={5} mt={2}>
           <Grid item xs={6} md={3}>

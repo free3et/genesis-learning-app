@@ -4,7 +4,6 @@ import {
   TableCell,
   TableContainer,
   Typography,
-  Divider,
   Stack,
   Rating,
   TableHead,
