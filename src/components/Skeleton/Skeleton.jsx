@@ -1,11 +1,4 @@
-import {
-  Grid,
-  Container,
-  Box,
-  Typography,
-  Stack,
-  Skeleton,
-} from "@mui/material";
+import { Grid, Stack, Skeleton } from "@mui/material";
 
 export const SkeletonOnLoading = () => {
   return (

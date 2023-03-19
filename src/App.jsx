@@ -1,18 +1,20 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { Container } from "@mui/system";
 import PropTypes from "prop-types";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import CssBaseline from "@mui/material/CssBaseline";
+import {
+  CssBaseline,
+  Box,
+  AppBar,
+  Toolbar,
+  Typography,
+  Fab,
+  Fade,
+} from "@mui/material";
+import { theme } from "./theme";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
-import Box from "@mui/material/Box";
-import Fab from "@mui/material/Fab";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import Fade from "@mui/material/Fade";
 import logo from "./assets/logo.svg";
 import { ThemeProvider } from "@mui/material/styles";
-import { theme } from "./theme";
 import { Footer } from "./components/Footer/Footer";
 
 function ScrollTop(props) {

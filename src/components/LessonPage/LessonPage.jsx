@@ -7,15 +7,10 @@ import {
   CardContent,
   Typography,
   Divider,
-  Stack,
-  Rating,
   List,
   ListItem,
   ListItemText,
-  Box,
 } from "@mui/material";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import DateRangeIcon from "@mui/icons-material/DateRange";
 import { SkeletonOnLoading } from "../Skeleton/Skeleton";
 import { LessonCard } from "../LessonCard/LessonCard";
 import { VideoPlayer } from "../Player/Player";
@@ -26,20 +21,12 @@ import { ErrorComponent } from "../ErrorComponent/ErrorComponent";
 export const LessonPage = () => {
   const { id } = useParams();
 
-  const {
-    data = [],
-    isLoading,
-    isError,
-    isSuccess,
-    error,
-  } = useGetCourseQuery(id);
+  const { data = [], isLoading, isError, error } = useGetCourseQuery(id);
 
   const {
     id: lessonId,
     title,
-    previewImageLink,
     meta,
-    lessons,
     description,
     duration,
     launchDate,

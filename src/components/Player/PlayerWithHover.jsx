@@ -1,5 +1,5 @@
 import ReactHlsPlayer from "react-hls-player";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 export const VideoPlayerWithHover = ({ muted, src }) => {
   const playerRef = useRef();
