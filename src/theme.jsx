@@ -52,13 +52,13 @@ export const theme = createTheme({
       fontSize: "1em",
     },
     body1: {
-      fontSize: "1.2em",
+      fontSize: "1.1em",
     },
     body2: {
-      fontSize: "1em",
+      fontSize: "0.9em",
     },
     caption: {
-      fontSize: "0.8em",
+      fontSize: "0.7em",
       fontWeight: 600,
       lineHeight: 1.3,
     },

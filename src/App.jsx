@@ -13,6 +13,7 @@ import Fade from "@mui/material/Fade";
 import logo from "./assets/logo.svg";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./theme";
+import { Footer } from "./components/Footer/Footer";
 
 function ScrollTop(props) {
   const { children, window } = props;
@@ -68,7 +69,7 @@ export const Layout = (props) => {
                 to="/genesis-learning-app/"
                 style={{ textDecoration: "none", color: "#ffffff" }}
               >
-                <Typography variant="h4" component="span">
+                <Typography variant="subtitle1" component="span">
                   My Courses
                 </Typography>
               </NavLink>
@@ -79,7 +80,7 @@ export const Layout = (props) => {
         <Container maxWidth="lg" sx={{ mt: 3 }} disableGutters>
           <Outlet></Outlet>
         </Container>
-
+        <Footer />
         <ScrollTop {...props}>
           <Fab size="small" aria-label="scroll back to top">
             <KeyboardArrowUpIcon />

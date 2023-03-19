@@ -95,7 +95,7 @@ export const LessonPage = () => {
 
                 <CardContent>
                   <Grid container justifyContent="center">
-                    <Grid item md={8}>
+                    <Grid item md={10}>
                       <VideoPlayer
                         src={meta?.courseVideoPreview?.link}
                         lessonId={lessonId}
@@ -104,7 +104,7 @@ export const LessonPage = () => {
                         gutterBottom
                         variant="body2"
                         component="h5"
-                        color="primary"
+                        color="text.secondary"
                       >
                         To make it louder, press the "+" key, to make it
                         quieter, press the "-" key. Return speed to normal -
