@@ -18,9 +18,9 @@ import {
   Pagination,
 } from "@mui/material";
 import { useState } from "react";
-import { Loader } from "../Loader/Loader";
 
 import { SingleLesson } from "../SingleLesson/SingleLesson";
+import { SkeletonOnLoading } from "../Skeleton/Skeleton";
 
 export const LessonsList = () => {
   const {
@@ -47,7 +47,9 @@ export const LessonsList = () => {
     <>
       {isLoading && (
         <Grid container spacing={2} justifyContent="center">
-          <Loader />
+          <SkeletonOnLoading />
+          <SkeletonOnLoading />
+          <SkeletonOnLoading />
         </Grid>
       )}
       <Grid container spacing={2} justifyContent="center">
@@ -60,7 +62,7 @@ export const LessonsList = () => {
             }}
             count={pagesCount}
             shape="rounded"
-            color="success"
+            color="primary"
             //variant="outlined"
             page={page}
             onChange={handleChange}

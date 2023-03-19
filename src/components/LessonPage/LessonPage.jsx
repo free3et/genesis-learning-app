@@ -18,8 +18,7 @@ import {
   ListItemText,
   Box,
 } from "@mui/material";
-import { Loader } from "../Loader/Loader";
-import ReactHlsPlayer from "react-hls-player";
+import { SkeletonOnLoading } from "../Skeleton/Skeleton";
 
 import { LessonCard } from "../LessonCard/LessonCard";
 import { VideoPlayer } from "../Player/Player";
@@ -62,7 +61,7 @@ export const LessonPage = () => {
       {isLoading && (
         <Container maxWidth="md" disableGutters>
           <Grid container spacing={2} justifyContent="center">
-            <Loader />
+            <SkeletonOnLoading />
           </Grid>
         </Container>
       )}
